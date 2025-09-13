@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const recordingStatus = document.getElementById('recordingStatus');
     const portalOverlay = document.getElementById('portalOverlay');
     const cursorTrail = document.getElementById('cursorTrail');
+    const closeVoiceBtn = document.getElementById('closeVoiceBtn');
+    const closeWishBtn = document.getElementById('closeWishBtn');
     
     // Audio management
     let backgroundMusic = null;
@@ -214,6 +216,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Send voice message event listener
     sendBtn.addEventListener('click', sendVoiceMessageToJoash);
+    
+    // Close button event listeners
+    closeVoiceBtn.addEventListener('click', closeVoiceContainer);
+    closeWishBtn.addEventListener('click', closeWishContainer);
     
     // Close modals with Escape key
     document.addEventListener('keydown', function(e) {
@@ -816,6 +822,15 @@ This message was sent from the Interactive Birthday Experience website.
     
     // Make downloadVoiceMessage globally available
     window.downloadVoiceMessage = downloadVoiceMessage;
+    
+    // Close container functions
+    function closeVoiceContainer() {
+        voiceContainer.style.display = 'none';
+    }
+    
+    function closeWishContainer() {
+        wishContainer.style.display = 'none';
+    }
     
     // Show detailed photo messages
     function showPhotoMessage(category) {

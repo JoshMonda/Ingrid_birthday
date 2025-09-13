@@ -877,11 +877,40 @@ body {
     width: 100%;
 }
 
+.wish-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .wish-content h3 {
     font-family: 'Dancing Script', cursive;
     font-size: 1.8rem;
     color: #8b4513;
-    margin-bottom: 15px;
+    margin: 0;
+}
+
+.close-wish-btn {
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 1.8rem;
+    color: #999;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-wish-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #333;
+    transform: scale(1.1);
 }
 
 .wish-input-container {
@@ -1097,11 +1126,40 @@ body {
     width: 100%;
 }
 
+.voice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .voice-content h3 {
     font-family: 'Dancing Script', cursive;
     font-size: 1.8rem;
     color: #8b4513;
-    margin-bottom: 15px;
+    margin: 0;
+}
+
+.close-voice-btn {
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 1.8rem;
+    color: #999;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-voice-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: #333;
+    transform: scale(1.1);
 }
 
 .voice-controls {
@@ -1325,6 +1383,33 @@ body {
         max-width: 90%;
     }
     
+    /* Ensure cards don't overlap on mobile */
+    .voice-container {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+        z-index: 1001;
+    }
+    
+    .wish-container {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        z-index: 1001;
+    }
+    
+    .cake-container {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        max-width: 200px;
+        z-index: 1001;
+    }
+    
     .chat-bubble {
         padding: 20px;
     }
@@ -1476,6 +1561,25 @@ body {
         height: 500px;
     }
     
+    /* Extra small mobile adjustments for cards */
+    .voice-container {
+        top: 5px;
+        right: 5px;
+        left: 5px;
+    }
+    
+    .wish-container {
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+    }
+    
+    .cake-container {
+        bottom: 5px;
+        right: 5px;
+        max-width: 150px;
+    }
+    
     .gallery-content {
         padding: 15px;
         max-width: 98%;
@@ -1521,8 +1625,20 @@ body {
         font-size: 1.8rem;
     }
     
+    .close-wish-btn {
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
+    
     .voice-content h3 {
         font-size: 1.8rem;
+    }
+    
+    .close-voice-btn {
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
     }
     
     .time-number {
