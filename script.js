@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursorTrail = document.getElementById('cursorTrail');
     const closeVoiceBtn = document.getElementById('closeVoiceBtn');
     const closeWishBtn = document.getElementById('closeWishBtn');
+    const cardName = document.getElementById('cardName');
     
     // Audio management
     let backgroundMusic = null;
@@ -150,6 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
             giftContainer.style.display = 'none';
             cardContainer.style.display = 'block';
             cardContainer.classList.add('fade-in');
+            
+            // Update the card with the user's name
+            if (userName && cardName) {
+                cardName.textContent = userName;
+            }
             
             // Show special features after card is revealed
             showSpecialFeatures();
@@ -358,6 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Download card functionality
     function downloadCard() {
         // Create a proper SVG with correct encoding
+        const displayName = userName || 'Ingrid';
         const svgContent = `<svg width="700" height="800" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -367,9 +374,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </defs>
             <rect width="700" height="800" fill="url(#bg)" rx="20"/>
             <text x="350" y="200" text-anchor="middle" font-family="Dancing Script, cursive" font-size="60" fill="#8b4513">Happy Birthday</text>
-            <text x="350" y="300" text-anchor="middle" font-family="Dancing Script, cursive" font-size="80" fill="#d2691e">${userName || 'Ingrid'}</text>
-            <text x="350" y="500" text-anchor="middle" font-family="Poppins, sans-serif" font-size="24" fill="#8b4513">With love and warmest wishes,</text>
-            <text x="350" y="550" text-anchor="middle" font-family="Dancing Script, cursive" font-size="32" fill="#d2691e">Joash</text>
+            <text x="350" y="300" text-anchor="middle" font-family="Dancing Script, cursive" font-size="80" fill="#d2691e">${displayName}</text>
+            <text x="350" y="450" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">Wishing you a day filled with joy, laughter,</text>
+            <text x="350" y="480" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">and all the happiness you deserve!</text>
+            <text x="350" y="520" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">May this new year bring you countless</text>
+            <text x="350" y="550" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">blessings and wonderful memories.</text>
+            <text x="350" y="620" text-anchor="middle" font-family="Poppins, sans-serif" font-size="22" fill="#8b4513">With love and warmest wishes,</text>
+            <text x="350" y="660" text-anchor="middle" font-family="Dancing Script, cursive" font-size="36" fill="#d2691e">Joash</text>
         </svg>`;
         
         // Create blob and download
@@ -377,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const url = URL.createObjectURL(blob);
         
         const link = document.createElement('a');
-        link.download = `birthday-card-${userName || 'ingrid'}.svg`;
+        link.download = `birthday-card-${displayName.toLowerCase().replace(/\s+/g, '-')}.svg`;
         link.href = url;
         link.click();
         
