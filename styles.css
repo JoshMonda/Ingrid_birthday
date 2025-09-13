@@ -722,139 +722,6 @@ body {
     }
 }
 
-/* Birthday Countdown */
-.countdown-container {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-    animation: fadeInUp 1s ease-out;
-    max-width: 300px;
-}
-
-.countdown-content {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    width: 100%;
-}
-
-.countdown-content h3 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: #8b4513;
-    margin-bottom: 15px;
-}
-
-.countdown-timer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.time-unit {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 15px;
-    border-radius: 15px;
-    color: white;
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-}
-
-.time-number {
-    font-size: 1.8rem;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-}
-
-.time-label {
-    font-size: 0.9rem;
-    opacity: 0.9;
-    margin: 0;
-}
-
-/* Birthday Celebration Styles */
-.birthday-celebration {
-    text-align: center;
-    animation: birthdayPulse 2s ease-in-out infinite;
-}
-
-.birthday-celebration h3 {
-    font-size: 1.6rem;
-    margin: 0 0 10px 0;
-    color: #ff6b6b;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-family: 'Dancing Script', cursive;
-}
-
-.birthday-status {
-    font-size: 1rem;
-    margin: 0 0 15px 0;
-    opacity: 0.9;
-    font-style: italic;
-    color: #8b4513;
-}
-
-.birthday-progress {
-    display: flex;
-    justify-content: space-around;
-    margin: 15px 0;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.progress-item {
-    text-align: center;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
-    padding: 10px;
-    border-radius: 10px;
-    min-width: 60px;
-    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-}
-
-.progress-number {
-    display: block;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.progress-label {
-    display: block;
-    font-size: 0.7rem;
-    opacity: 0.9;
-    margin-top: 2px;
-    color: white;
-}
-
-.birthday-message {
-    font-size: 0.9rem;
-    margin: 15px 0 0 0;
-    opacity: 0.9;
-    font-style: italic;
-    color: #8b4513;
-    font-weight: 500;
-}
-
-@keyframes birthdayPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-.countdown-message {
-    color: #8b4513;
-    font-style: italic;
-    font-size: 1.1rem;
-}
 
 /* Wish Making Feature */
 .wish-container {
@@ -1457,20 +1324,6 @@ body {
         gap: 15px;
     }
     
-    /* Mobile responsiveness for new features */
-    .countdown-timer {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .time-unit {
-        min-width: 60px;
-        padding: 15px;
-    }
-    
-    .time-number {
-        font-size: 2rem;
-    }
     
     .wish-content {
         padding: 20px;
@@ -1617,9 +1470,6 @@ body {
     }
     
     /* Extra small mobile adjustments */
-    .countdown-content h3 {
-        font-size: 1.8rem;
-    }
     
     .wish-content h3 {
         font-size: 1.8rem;
@@ -1641,15 +1491,7 @@ body {
         height: 35px;
     }
     
-    .time-number {
-        font-size: 1.8rem;
-    }
-    
     .cake-instruction {
-        font-size: 1rem;
-    }
-    
-    .countdown-message {
         font-size: 1rem;
     }
     

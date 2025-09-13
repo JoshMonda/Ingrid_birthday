@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryModal = document.getElementById('galleryModal');
     const closeGallery = document.getElementById('closeGallery');
     const audioToggle = document.getElementById('audioToggle');
-    const countdownContainer = document.getElementById('countdownContainer');
     const wishContainer = document.getElementById('wishContainer');
     const wishInput = document.getElementById('wishInput');
     const makeWishBtn = document.getElementById('makeWishBtn');
@@ -225,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             // Close all modals
-            countdownContainer.style.display = 'none';
             wishContainer.style.display = 'none';
             cakeContainer.style.display = 'none';
             voiceContainer.style.display = 'none';
@@ -418,71 +416,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Birthday countdown timer - Ingrid's Birthday Celebration
-    function startCountdown() {
-        countdownContainer.style.display = 'block';
-        
-        function updateCountdown() {
-            const now = new Date();
-            const indianaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Indiana/Indianapolis"}));
-            const birthday = new Date(2025, 8, 13); // September 13, 2025 (month is 0-indexed)
-            
-            // Check if it's currently Ingrid's birthday in Indiana
-            const isBirthday = indianaTime.getMonth() === 8 && indianaTime.getDate() === 13;
-            
-            if (isBirthday) {
-                // It's her birthday! Show celebration
-                const hoursIntoBirthday = indianaTime.getHours();
-                const minutesIntoBirthday = indianaTime.getMinutes();
-                const secondsIntoBirthday = indianaTime.getSeconds();
-                
-                // Update the countdown display to show birthday celebration
-                const countdownDisplay = countdownContainer.querySelector('.countdown-display');
-                if (countdownDisplay) {
-                    countdownDisplay.innerHTML = `
-                        <div class="birthday-celebration">
-                            <h3>🎉 Happy Birthday, Ingrid! 🎉</h3>
-                            <p class="birthday-status">Your special day has arrived!</p>
-                            <div class="birthday-progress">
-                                <div class="progress-item">
-                                    <span class="progress-number">${hoursIntoBirthday.toString().padStart(2, '0')}</span>
-                                    <span class="progress-label">Hours Into Your Birthday</span>
-                                </div>
-                                <div class="progress-item">
-                                    <span class="progress-number">${minutesIntoBirthday.toString().padStart(2, '0')}</span>
-                                    <span class="progress-label">Minutes</span>
-                                </div>
-                                <div class="progress-item">
-                                    <span class="progress-number">${secondsIntoBirthday.toString().padStart(2, '0')}</span>
-                                    <span class="progress-label">Seconds</span>
-                                </div>
-                            </div>
-                            <p class="birthday-message">Enjoy every magical moment of your special day! ✨</p>
-                        </div>
-                    `;
-                }
-            } else {
-                // Calculate time until next birthday
-                const nextBirthday = new Date(now.getFullYear(), 8, 13);
-                if (now.getMonth() > 8 || (now.getMonth() === 8 && now.getDate() > 13)) {
-                    nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
-                }
-                
-                const distance = nextBirthday.getTime() - now;
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            }
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    }
     
     // Wish making feature
     function showWishMaker() {
@@ -1039,25 +972,16 @@ Your family and friends 🌟✨`
     // Show special features after card is revealed
     function showSpecialFeatures() {
         setTimeout(() => {
-            showCountdown();
+            showWishMaker();
         }, 2000);
         
         setTimeout(() => {
-            showWishMaker();
+            showBirthdayCake();
         }, 4000);
         
         setTimeout(() => {
-            showBirthdayCake();
-        }, 6000);
-        
-        setTimeout(() => {
             showVoiceRecorder();
-        }, 8000);
-    }
-    
-    function showCountdown() {
-        countdownContainer.style.display = 'block';
-        startCountdown();
+        }, 6000);
     }
     
     // Add floating particles animation
