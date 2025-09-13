@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cursorTrail = document.getElementById('cursorTrail');
     const closeVoiceBtn = document.getElementById('closeVoiceBtn');
     const closeWishBtn = document.getElementById('closeWishBtn');
-    const cardName = document.getElementById('cardName');
+    const canvaCard = document.getElementById('canvaCard');
     
     // Audio management
     let backgroundMusic = null;
@@ -152,9 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
             cardContainer.style.display = 'block';
             cardContainer.classList.add('fade-in');
             
-            // Update the card with the user's name
-            if (userName && cardName) {
-                cardName.textContent = userName;
+            // Add personalized name overlay on the Canva card
+            if (userName) {
+                addPersonalizedNameOverlay(userName);
             }
             
             // Show special features after card is revealed
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Download card functionality
     function downloadCard() {
-        // Create a proper SVG with correct encoding
+        // Create a personalized birthday card SVG
         const displayName = userName || 'Ingrid';
         const svgContent = `<svg width="700" height="800" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -371,16 +371,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
                     <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
                 </linearGradient>
+                <linearGradient id="nameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#d2691e;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#ff8c00;stop-opacity:1" />
+                </linearGradient>
             </defs>
             <rect width="700" height="800" fill="url(#bg)" rx="20"/>
-            <text x="350" y="200" text-anchor="middle" font-family="Dancing Script, cursive" font-size="60" fill="#8b4513">Happy Birthday</text>
-            <text x="350" y="300" text-anchor="middle" font-family="Dancing Script, cursive" font-size="80" fill="#d2691e">${displayName}</text>
+            
+            <!-- Decorative elements -->
+            <circle cx="100" cy="100" r="30" fill="#ff6b6b" opacity="0.3"/>
+            <circle cx="600" cy="150" r="25" fill="#4ecdc4" opacity="0.3"/>
+            <circle cx="150" cy="700" r="35" fill="#f9ca24" opacity="0.3"/>
+            <circle cx="550" cy="650" r="28" fill="#6c5ce7" opacity="0.3"/>
+            
+            <!-- Balloons -->
+            <ellipse cx="120" cy="200" rx="15" ry="25" fill="#ff6b6b"/>
+            <ellipse cx="580" cy="180" rx="12" ry="20" fill="#4ecdc4"/>
+            <ellipse cx="350" cy="120" rx="18" ry="30" fill="#f9ca24"/>
+            
+            <!-- Main content -->
+            <text x="350" y="200" text-anchor="middle" font-family="Dancing Script, cursive" font-size="60" fill="#8b4513" font-weight="700">Happy Birthday</text>
+            <text x="350" y="300" text-anchor="middle" font-family="Dancing Script, cursive" font-size="80" fill="url(#nameGradient)" font-weight="600">${displayName}</text>
+            
+            <!-- Birthday message -->
             <text x="350" y="450" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">Wishing you a day filled with joy, laughter,</text>
             <text x="350" y="480" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">and all the happiness you deserve!</text>
             <text x="350" y="520" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">May this new year bring you countless</text>
             <text x="350" y="550" text-anchor="middle" font-family="Poppins, sans-serif" font-size="20" fill="#5a4a3a">blessings and wonderful memories.</text>
-            <text x="350" y="620" text-anchor="middle" font-family="Poppins, sans-serif" font-size="22" fill="#8b4513">With love and warmest wishes,</text>
-            <text x="350" y="660" text-anchor="middle" font-family="Dancing Script, cursive" font-size="36" fill="#d2691e">Joash</text>
+            
+            <!-- Signature -->
+            <text x="350" y="650" text-anchor="middle" font-family="Poppins, sans-serif" font-size="22" fill="#8b4513" font-style="italic">With love and warmest wishes,</text>
+            <text x="350" y="690" text-anchor="middle" font-family="Dancing Script, cursive" font-size="36" fill="#d2691e" font-weight="600">Joash</text>
         </svg>`;
         
         // Create blob and download
@@ -483,20 +504,76 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Interactive birthday cake
     function showBirthdayCake() {
+        console.log('Showing birthday cake...');
         cakeContainer.style.display = 'block';
         
-        // Add candle click handlers
+        // Wait for the cake to be visible, then add candle click handlers
+        setTimeout(() => {
+            addCandleClickHandlers();
+        }, 200);
+    }
+    
+    // Add candle click handlers
+    function addCandleClickHandlers() {
+        console.log('Adding candle click handlers...');
         const candles = document.querySelectorAll('.candle');
+        console.log('Found candles:', candles.length);
+        
+        if (candles.length === 0) {
+            console.error('No candles found!');
+            return;
+        }
+        
         candles.forEach((candle, index) => {
-            candle.addEventListener('click', function() {
-                this.classList.toggle('lit');
-                
-                // Create sparkle effect when candle is lit
-                if (this.classList.contains('lit')) {
-                    createCandleSparkle(this);
-                }
-            });
+            console.log(`Setting up candle ${index + 1}:`, candle);
+            
+            // Remove any existing event listeners to prevent duplicates
+            candle.removeEventListener('click', handleCandleClick);
+            candle.removeEventListener('touchstart', handleCandleClick);
+            
+            // Add both click and touch handlers for better mobile support
+            candle.addEventListener('click', handleCandleClick);
+            candle.addEventListener('touchstart', handleCandleClick);
+            
+            // Make sure the candle is clickable
+            candle.style.cursor = 'pointer';
+            candle.style.pointerEvents = 'auto';
+            candle.style.userSelect = 'none';
+            
+            // Add a visual indicator that it's clickable
+            candle.title = 'Click to light up!';
+            
+            console.log(`Candle ${index + 1} setup complete`);
         });
+        
+        console.log('All candle handlers added successfully');
+    }
+    
+    // Handle candle click
+    function handleCandleClick(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const candle = event.currentTarget;
+        console.log('Candle clicked!', candle);
+        
+        // Toggle the lit state
+        const wasLit = candle.classList.contains('lit');
+        candle.classList.toggle('lit');
+        const isNowLit = candle.classList.contains('lit');
+        
+        console.log(`Candle was ${wasLit ? 'lit' : 'unlit'}, now ${isNowLit ? 'lit' : 'unlit'}`);
+        
+        // Create sparkle effect when candle is lit
+        if (isNowLit) {
+            createCandleSparkle(candle);
+        }
+        
+        // Add a click animation
+        candle.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            candle.style.transform = 'scale(1)';
+        }, 150);
     }
     
     function createCandleSparkle(candle) {
@@ -548,47 +625,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function startRecording() {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
+            console.log('Starting recording...');
+            recordingStatus.textContent = 'Requesting microphone access...';
+            
+            const stream = await navigator.mediaDevices.getUserMedia({ 
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                    sampleRate: 44100
+                } 
+            });
+            
+            console.log('Microphone access granted');
+            mediaRecorder = new MediaRecorder(stream, {
+                mimeType: 'audio/webm;codecs=opus'
+            });
             recordedChunks = [];
             
             mediaRecorder.ondataavailable = function(event) {
-                recordedChunks.push(event.data);
+                console.log('Data available:', event.data.size, 'bytes');
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
             };
             
             mediaRecorder.onstop = function() {
-                recordedBlob = new Blob(recordedChunks, { type: 'audio/wav' });
-                const audioUrl = URL.createObjectURL(recordedBlob);
+                console.log('Recording stopped, chunks:', recordedChunks.length);
+                if (recordedChunks.length > 0) {
+                    recordedBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+                    console.log('Recording blob created:', recordedBlob.size, 'bytes');
+                    
+                    // Enable play and send buttons
+                    playBtn.disabled = false;
+                    sendBtn.disabled = false;
+                    
+                    // Create audio URL for playback
+                    const audioUrl = URL.createObjectURL(recordedBlob);
+                    
+                    playBtn.onclick = () => {
+                        const audio = new Audio(audioUrl);
+                        audio.play().catch(e => console.error('Playback error:', e));
+                    };
+                    
+                    recordingStatus.textContent = 'Recording saved! Click play to hear your message or send to Joash.';
+                } else {
+                    recordingStatus.textContent = 'No audio recorded. Please try again.';
+                }
                 
-                // Enable play and send buttons
-                playBtn.disabled = false;
-                sendBtn.disabled = false;
-                
-                playBtn.onclick = () => {
-                    const audio = new Audio(audioUrl);
-                    audio.play();
-                };
-                
-                recordingStatus.textContent = 'Recording saved! Click play to hear your message or send to Joash.';
+                // Stop all tracks to release microphone
+                stream.getTracks().forEach(track => track.stop());
             };
             
-            mediaRecorder.start();
+            mediaRecorder.onerror = function(event) {
+                console.error('MediaRecorder error:', event.error);
+                recordingStatus.textContent = 'Recording error occurred. Please try again.';
+            };
+            
+            mediaRecorder.start(1000); // Collect data every second
             isRecording = true;
             recordBtn.classList.add('recording');
-            recordBtn.textContent = 'Stop Recording';
+            recordBtn.innerHTML = '<span class="voice-icon">⏹️</span>Stop Recording';
             recordingStatus.textContent = 'Recording... Speak now!';
             
+            console.log('Recording started successfully');
+            
         } catch (error) {
-            recordingStatus.textContent = 'Microphone access denied. Please allow microphone access.';
+            console.error('Recording error:', error);
+            recordingStatus.textContent = 'Microphone access denied. Please allow microphone access and try again.';
         }
     }
     
     function stopRecording() {
         if (mediaRecorder && isRecording) {
+            console.log('Stopping recording...');
             mediaRecorder.stop();
             isRecording = false;
             recordBtn.classList.remove('recording');
-            recordBtn.textContent = 'Start Recording';
+            recordBtn.innerHTML = '<span class="voice-icon">🎤</span>Start Recording';
+            recordingStatus.textContent = 'Processing recording...';
         }
     }
     
@@ -599,164 +713,112 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        console.log('Sending voice message to Joash...');
+        
         // Show sending animation
         sendBtn.classList.add('sending');
         sendBtn.disabled = true;
-        recordingStatus.textContent = 'Sending message to Joash...';
+        recordingStatus.textContent = 'Preparing message for Joash...';
         
         try {
-            // Convert blob to base64 for email attachment
-            const base64Audio = await blobToBase64(recordedBlob);
+            // Create a simple email solution using mailto with download
+            const displayName = userName || 'Anonymous';
+            const timestamp = new Date().toLocaleString();
+            
+            // Create download link for the audio file
+            const audioUrl = URL.createObjectURL(recordedBlob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = audioUrl;
+            downloadLink.download = `birthday-message-${displayName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.webm`;
             
             // Create email content
-            const emailData = {
-                to: 'jmonda2020@gmail.com',
-                subject: `Birthday Voice Message for Ingrid in Indiana from ${userName || 'Anonymous'}`,
-                body: `
-                    <h2>🎉 Birthday Voice Message for Ingrid 🎉</h2>
-                    <p>Dear Joash,</p>
-                    <p>Someone has recorded a special birthday voice message for Ingrid who is in Indiana!</p>
-                    <p><strong>From:</strong> ${userName || 'Anonymous'}</p>
-                    <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
-                    <p><strong>Time:</strong> ${new Date().toLocaleTimeString()}</p>
-                    <p><strong>Location:</strong> Indiana, USA</p>
-                    <p>The voice message is attached to this email. Please play it for Ingrid on her special day!</p>
-                    <p>Wishing Ingrid a wonderful birthday from Indiana! 🎂✨</p>
-                    <hr>
-                    <p><em>This message was sent from the Interactive Birthday Experience website.</em></p>
-                `,
-                attachment: {
-                    filename: `birthday-message-ingrid-indiana-${userName || 'anonymous'}-${Date.now()}.wav`,
-                    content: base64Audio,
-                    type: 'audio/wav'
-                }
-            };
+            const subject = encodeURIComponent(`🎉 Birthday Voice Message for Ingrid from ${displayName}`);
+            const body = encodeURIComponent(`
+Dear Joash,
+
+🎉 Birthday Voice Message for Ingrid 🎉
+
+Someone has recorded a special birthday voice message for Ingrid!
+
+From: ${displayName}
+Date: ${timestamp}
+Location: Indiana, USA
+
+The voice message is attached to this email. Please download and play it for Ingrid on her special day!
+
+Wishing Ingrid a wonderful birthday! 🎂✨
+
+---
+This message was sent from the Interactive Birthday Experience website.
+            `);
             
-            // Send email using EmailJS (you'll need to set this up)
-            await sendEmailWithAttachment(emailData);
+            // Create Gmail compose link
+            const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=jmonda2020@gmail.com&su=${subject}&body=${body}`;
             
-            // Success message
-            recordingStatus.textContent = '✅ Message sent successfully to Joash! He will receive your voice message.';
-            sendBtn.textContent = 'Message Sent!';
+            // Show instructions to user
+            recordingStatus.innerHTML = `
+                <div style="text-align: center; padding: 10px;">
+                    <p>📧 Ready to send to Joash!</p>
+                    <p><strong>Recipient:</strong> jmonda2020@gmail.com</p>
+                    <p><strong>For:</strong> Ingrid's Birthday</p>
+                    <div style="margin: 15px 0;">
+                        <button onclick="downloadVoiceMessage()" style="
+                            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            margin: 5px;
+                            font-size: 14px;
+                        ">📥 Download Voice File</button>
+                        <button onclick="openGmailCompose()" style="
+                            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+                            color: white;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            margin: 5px;
+                            font-size: 14px;
+                        ">📧 Open Gmail</button>
+                    </div>
+                    <p style="font-size: 12px; color: #666;">
+                        1. Download the voice file<br>
+                        2. Open Gmail compose<br>
+                        3. Attach the downloaded file<br>
+                        4. Send to Joash!
+                    </p>
+                </div>
+            `;
+            
+            // Store the download link globally
+            window.voiceDownloadLink = downloadLink;
+            window.gmailComposeLink = gmailLink;
+            
+            sendBtn.textContent = 'Instructions Ready!';
             
             // Create success animation
             createSuccessAnimation();
             
         } catch (error) {
-            console.error('Error sending email:', error);
-            recordingStatus.textContent = '❌ Failed to send message. Please try again or contact Joash directly.';
+            console.error('Error preparing message:', error);
+            recordingStatus.textContent = '❌ Error preparing message. Please try again.';
             sendBtn.classList.remove('sending');
             sendBtn.disabled = false;
         }
     }
     
-    // Convert blob to base64
-    function blobToBase64(blob) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-        });
-    }
-    
-    // Send email with attachment using EmailJS
-    async function sendEmailWithAttachment(emailData) {
-        // Initialize EmailJS (you'll need to get your own service ID, template ID, and public key)
-        // For now, we'll use a demo setup
-        const serviceId = 'service_demo'; // Replace with your EmailJS service ID
-        const templateId = 'template_demo'; // Replace with your EmailJS template ID
-        const publicKey = 'demo_key'; // Replace with your EmailJS public key
-        
-        try {
-            // Initialize EmailJS
-            emailjs.init(publicKey);
-            
-            // Prepare template parameters
-            const templateParams = {
-                to_email: emailData.to,
-                subject: emailData.subject,
-                message: emailData.body,
-                from_name: userName || 'Anonymous',
-                date: new Date().toLocaleDateString(),
-                time: new Date().toLocaleTimeString(),
-                location: 'Indiana, USA',
-                recipient_name: 'Ingrid',
-                // Note: EmailJS doesn't support file attachments directly
-                // The audio file would need to be uploaded to a cloud service first
-                audio_note: 'Voice message recorded for Ingrid in Indiana - please check the birthday experience website'
-            };
-            
-            // Send email
-            const response = await emailjs.send(serviceId, templateId, templateParams);
-            console.log('Email sent successfully:', response);
-            return response;
-            
-        } catch (error) {
-            console.error('EmailJS error:', error);
-            // Fallback: Create a mailto link for manual sending
-            createMailtoFallback(emailData);
-            throw error;
-        }
-    }
-    
-    // Fallback method: Create Gmail compose link
-    function createMailtoFallback(emailData) {
-        const subject = encodeURIComponent(emailData.subject);
-        const body = encodeURIComponent(`
-Dear Joash,
-
-🎉 Birthday Voice Message for Ingrid 🎉
-
-Someone has recorded a special birthday voice message for Ingrid who is in Indiana!
-
-From: ${userName || 'Anonymous'}
-Date: ${new Date().toLocaleDateString()}
-Time: ${new Date().toLocaleTimeString()}
-Location: Indiana, USA
-
-The voice message was recorded on the Interactive Birthday Experience website.
-Please download and play the attached voice file for Ingrid on her special day!
-
-Wishing Ingrid a wonderful birthday from Indiana! 🎂✨
-
----
-This message was sent from the Interactive Birthday Experience website.
-        `);
-        
-        // Create Gmail compose link (like the one shown in the console)
-        const gmailComposeLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailData.to}&su=${subject}&body=${body}`;
-        
-        // Open Gmail compose
-        window.open(gmailComposeLink, '_blank');
-        
-        // Show instruction to user
-        recordingStatus.innerHTML = `
-            <div style="text-align: center;">
-                <p>📧 Gmail compose opened!</p>
-                <p>Please download the voice file and attach it to the email for Joash.</p>
-                <p><strong>Recipient:</strong> jmonda2020@gmail.com</p>
-                <p><strong>For:</strong> Ingrid in Indiana</p>
-                <button onclick="downloadVoiceMessage()" style="
-                    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    margin-top: 10px;
-                ">Download Voice File</button>
-            </div>
-        `;
-    }
     
     // Download voice message as file
     function downloadVoiceMessage() {
-        if (recordedBlob) {
+        if (window.voiceDownloadLink) {
+            window.voiceDownloadLink.click();
+        } else if (recordedBlob) {
             const url = URL.createObjectURL(recordedBlob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `birthday-message-${userName || 'anonymous'}-${Date.now()}.wav`;
+            a.download = `birthday-message-${userName || 'anonymous'}-${Date.now()}.webm`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -764,8 +826,16 @@ This message was sent from the Interactive Birthday Experience website.
         }
     }
     
-    // Make downloadVoiceMessage globally available
+    // Open Gmail compose
+    function openGmailCompose() {
+        if (window.gmailComposeLink) {
+            window.open(window.gmailComposeLink, '_blank');
+        }
+    }
+    
+    // Make functions globally available
     window.downloadVoiceMessage = downloadVoiceMessage;
+    window.openGmailCompose = openGmailCompose;
     
     // Close container functions
     function closeVoiceContainer() {
@@ -774,6 +844,81 @@ This message was sent from the Interactive Birthday Experience website.
     
     function closeWishContainer() {
         wishContainer.style.display = 'none';
+    }
+    
+    // Add personalized name overlay on Canva card
+    function addPersonalizedNameOverlay(name) {
+        // Remove any existing name overlay
+        const existingOverlay = document.getElementById('nameOverlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+        
+        // Create name overlay
+        const nameOverlay = document.createElement('div');
+        nameOverlay.id = 'nameOverlay';
+        nameOverlay.innerHTML = `
+            <div class="name-overlay-content">
+                <h2 class="personalized-name">${name}</h2>
+            </div>
+        `;
+        
+        // Style the overlay
+        nameOverlay.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        `;
+        
+        // Style the content
+        const content = nameOverlay.querySelector('.name-overlay-content');
+        content.style.cssText = `
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: nameSlideIn 1s ease-out;
+        `;
+        
+        // Style the name
+        const nameElement = nameOverlay.querySelector('.personalized-name');
+        nameElement.style.cssText = `
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #d2691e;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            animation: nameGlow 2s ease-in-out infinite alternate;
+        `;
+        
+        // Add to card wrapper
+        const cardWrapper = document.querySelector('.card-wrapper');
+        if (cardWrapper) {
+            cardWrapper.appendChild(nameOverlay);
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                if (nameOverlay && nameOverlay.parentNode) {
+                    nameOverlay.style.animation = 'nameSlideOut 1s ease-in forwards';
+                    setTimeout(() => {
+                        if (nameOverlay && nameOverlay.parentNode) {
+                            nameOverlay.remove();
+                        }
+                    }, 1000);
+                }
+            }, 5000);
+        }
     }
     
     // Show detailed photo messages
@@ -925,6 +1070,17 @@ Your family and friends 🌟✨`
     // Make functions globally available
     window.showPhotoMessage = showPhotoMessage;
     window.closeMessageModal = closeMessageModal;
+    window.testCandles = function() {
+        console.log('Testing candles...');
+        const candles = document.querySelectorAll('.candle');
+        console.log('Found candles:', candles.length);
+        candles.forEach((candle, index) => {
+            console.log(`Candle ${index + 1}:`, candle);
+            console.log('  - Visible:', candle.offsetWidth > 0 && candle.offsetHeight > 0);
+            console.log('  - Clickable:', candle.style.pointerEvents !== 'none');
+            console.log('  - Has click handler:', candle.onclick !== null);
+        });
+    };
     
     // Create success animation
     function createSuccessAnimation() {
@@ -1086,6 +1242,13 @@ Your family and friends 🌟✨`
         createCursorTrail();
         addCardEffects();
         initBackgroundMusic();
+        
+        // Initialize cake candles if cake is visible
+        setTimeout(() => {
+            if (cakeContainer.style.display !== 'none') {
+                addCandleClickHandlers();
+            }
+        }, 1000);
         
         // Add some initial sparkle effects
         setTimeout(() => {
