@@ -173,50 +173,68 @@ This message was sent from the Global South Incubator Christmas Celebration plat
           onClose()
         }, 3000)
       } else {
-        // Fallback: Create download and open email compose
+        // Fallback: Automatically download file and open email compose
         const url = URL.createObjectURL(recordedBlob)
         const downloadLink = document.createElement('a')
         downloadLink.href = url
         downloadLink.download = fileName
+        downloadLink.style.display = 'none'
+        document.body.appendChild(downloadLink)
         downloadLink.click()
+        document.body.removeChild(downloadLink)
         
         // Open Gmail compose with pre-filled content
         const subject = encodeURIComponent(`🎄 Christmas Voice Message from ${displayName} - Global South Incubator`)
-        const body = encodeURIComponent(emailBody)
+        const body = encodeURIComponent(emailBody + `\n\n📎 The voice message file (${fileName}) has been downloaded to your device. Please attach it to this email before sending.`)
         const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${teamEmail}&su=${subject}&body=${body}`
         
-        setRecordingStatus(`✅ Audio file downloaded! Opening Gmail compose...
+        setRecordingStatus(`✅ Audio file downloaded! Opening Gmail...
         
-Please attach the downloaded file (${fileName}) to the email before sending.
-Recipient: ${teamEmail}`)
+📎 Please attach the downloaded file (${fileName}) to the email.
+📍 It's usually in your Downloads folder.
+👤 Recipient: ${teamEmail}`)
         
+        // Open email compose after a brief delay
         setTimeout(() => {
           window.open(gmailLink, '_blank')
-        }, 500)
+          setRecordingStatus(`✅ Email compose opened! 
+          
+📎 Don't forget to attach the file: ${fileName}
+📍 Check your Downloads folder if you don't see it.`)
+        }, 800)
         
-        setTimeout(() => URL.revokeObjectURL(url), 1000)
+        setTimeout(() => URL.revokeObjectURL(url), 2000)
       }
     } catch (error) {
       console.error('Error sending email:', error)
-      setRecordingStatus(`❌ Error: ${error.message}. Please try the manual method.`)
       
       // Fallback to download method
+      const fileName = `christmas-message-${displayName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.webm`
       const url = URL.createObjectURL(recordedBlob)
       const downloadLink = document.createElement('a')
       downloadLink.href = url
-      downloadLink.download = `christmas-message-${displayName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.webm`
+      downloadLink.download = fileName
+      downloadLink.style.display = 'none'
+      document.body.appendChild(downloadLink)
       downloadLink.click()
+      document.body.removeChild(downloadLink)
       
       const subject = encodeURIComponent(`🎄 Christmas Voice Message from ${displayName} - Global South Incubator`)
-      const body = encodeURIComponent(`Dear Global South Incubator Team,\n\n🎄 Christmas Voice Message 🎄\n\nA team member has recorded a special Christmas voice message for the team!\n\nFrom: ${displayName}\nDate: ${timestamp}\nCompany: Global South Incubator\n\nPlease attach the downloaded audio file to this email.\n\nWishing everyone a Merry Christmas and a Happy New Year! 🎄✨\n\n---\nThis platform was created by Joash as a gift to celebrate our team.`)
+      const body = encodeURIComponent(`Dear Global South Incubator Team,\n\n🎄 Christmas Voice Message 🎄\n\nA team member has recorded a special Christmas voice message for the team!\n\nFrom: ${displayName}\nDate: ${timestamp}\nCompany: Global South Incubator\n\n📎 Please attach the downloaded audio file (${fileName}) to this email.\n\nWishing everyone a Merry Christmas and a Happy New Year! 🎄✨\n\n---\nThis platform was created by Joash as a gift to celebrate our team.`)
       const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${teamEmail}&su=${subject}&body=${body}`
+      
+      setRecordingStatus(`⚠️ EmailJS error. Using manual method...
+      
+📎 File downloaded: ${fileName}
+📧 Opening Gmail compose...
+👤 Recipient: ${teamEmail}`)
       
       setTimeout(() => {
         window.open(gmailLink, '_blank')
-        setRecordingStatus(`Please attach the downloaded file to the email. Recipient: ${teamEmail}`)
-      }, 500)
+        setRecordingStatus(`✅ Gmail opened! Please attach the file: ${fileName}`)
+      }, 800)
       
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      setTimeout(() => URL.revokeObjectURL(url), 2000)
     }
   }
 
