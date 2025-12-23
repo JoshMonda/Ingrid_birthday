@@ -118,26 +118,13 @@ export default function CEOMessage({ onClose }) {
             💌 Would you like to respond?
           </h4>
           <div className="flex justify-center">
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                const subject = encodeURIComponent(`Response to Joash's Christmas/New Year Message`)
-                const body = encodeURIComponent(`Dear Joash,\n\nThank you for your thoughtful messages! I wanted to respond...\n\nBest regards,\nBrian C. Alston`)
-                const emailLink = `mailto:jmonda2020@gmail.com?subject=${subject}&body=${body}`
-                
-                // Create a temporary anchor element for better compatibility
-                const link = document.createElement('a')
-                link.href = emailLink
-                link.style.display = 'none'
-                document.body.appendChild(link)
-                link.click()
-                document.body.removeChild(link)
-              }}
-              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            <a
+              href="mailto:jmonda2020@gmail.com?subject=Response%20to%20Joash's%20Christmas/New%20Year%20Message&body=Dear%20Joash,%0A%0AThank%20you%20for%20your%20thoughtful%20messages!%20I%20wanted%20to%20respond...%0A%0ABest%20regards,%0ABrian%20C.%20Alston"
+              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer no-underline"
             >
               <span>📧</span>
               <span>Email Joash</span>
-            </button>
+            </a>
           </div>
           <p className="text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4 text-center">
             Joash's Email: jmonda2020@gmail.com
