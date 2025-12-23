@@ -6,13 +6,13 @@ export default function CEOMessage({ onClose }) {
   const christmasMessages = [
     "🎄 Dear CEO Brian C. Alston,",
     "",
-    "As we celebrate this beautiful Christmas season, I want to express my deepest gratitude for your visionary leadership and unwavering commitment to Global South Incubator.",
+    "I hope this message finds you well. I wanted to take a moment to express my deepest gratitude for your visionary leadership and unwavering commitment to Global South Incubator throughout 2025.",
     "",
-    "Your guidance has been the cornerstone of our success throughout 2025. Your passion for innovation, your dedication to our mission, and your belief in our team have inspired each and every one of us to reach greater heights.",
+    "Your guidance has been the cornerstone of our success. Your passion for innovation, your dedication to our mission, and your belief in our team have inspired each and every one of us to reach greater heights. You've created not just a company, but a family - a place where dreams are nurtured and aspirations become reality.",
     "",
-    "This platform is a small token of appreciation for everything you've done. You've created not just a company, but a family - a place where dreams are nurtured and aspirations become reality.",
+    "As a token of appreciation for everything you've done and as a celebration of our amazing team, I've created this Christmas celebration platform as a gift to the Global South Incubator team. This platform allows each team member to celebrate, share messages, and express gratitude for our journey together in 2025.",
     "",
-    "May this Christmas bring you peace, joy, and well-deserved rest. You've worked tirelessly to make Global South Incubator a beacon of hope and opportunity.",
+    "May this Christmas bring you peace, joy, and well-deserved rest. You've worked tirelessly to make Global South Incubator a beacon of hope and opportunity, and this platform is my way of honoring that dedication.",
     "",
     "With deepest respect and warmest wishes,",
     "Joash",
@@ -26,9 +26,9 @@ export default function CEOMessage({ onClose }) {
     "",
     "Your vision for our future inspires confidence. The foundation you've built in 2025 sets us on a path to even greater achievements. Your strategic thinking, innovative approach, and genuine care for our team create an environment where excellence thrives.",
     "",
-    "I look forward to continuing this incredible journey with you, learning from your wisdom, and contributing to the growth and success of our company.",
+    "This celebration platform that I've created as a gift to the Global South Incubator team represents my gratitude for the incredible year we've shared together. It's a way for each of us to celebrate our achievements, connect with one another, and look forward to the opportunities that 2026 will bring.",
     "",
-    "May 2026 bring you continued success, fulfillment, and the realization of all your professional aspirations. The best is yet to come!",
+    "I look forward to continuing this incredible journey with you, learning from your wisdom, and contributing to the growth and success of our company. May 2026 bring you continued success, fulfillment, and the realization of all your professional aspirations. The best is yet to come!",
     "",
     "With great anticipation and respect,",
     "Joash",
@@ -48,7 +48,7 @@ export default function CEOMessage({ onClose }) {
           
           <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
             <p className="font-poppins text-sm sm:text-lg text-gray-700 text-center leading-relaxed">
-              This Christmas celebration platform is a gift from Joash to express gratitude for your exceptional leadership throughout 2025.
+              This Christmas celebration platform is a gift from Joash to the Global South Incubator team, created to express gratitude for your exceptional leadership and to celebrate our amazing journey together throughout 2025.
             </p>
           </div>
 
@@ -72,8 +72,8 @@ export default function CEOMessage({ onClose }) {
   }
 
   return (
-      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2000] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-      <div className="bg-gradient-to-br from-green-50 to-red-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-4xl w-full shadow-2xl border-2 sm:border-4 border-green-600 my-4 sm:my-8 relative">
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2000] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+      <div className="bg-gradient-to-br from-green-50 to-red-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-4xl w-full shadow-2xl border-2 sm:border-4 border-green-600 my-4 sm:my-8 relative max-h-[95vh] overflow-y-auto">
         {/* Close button */}
         <button
           onClick={onClose}
@@ -89,8 +89,8 @@ export default function CEOMessage({ onClose }) {
         </div>
 
         {/* Christmas Message */}
-        <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6 border-l-4 border-green-600">
-          <h4 className="font-dancing text-2xl sm:text-3xl text-green-700 mb-3 sm:mb-4 text-center">🎄 Christmas Message 🎄</h4>
+        <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6 border-l-4 border-green-600 max-h-[50vh] overflow-y-auto">
+          <h4 className="font-dancing text-2xl sm:text-3xl text-green-700 mb-3 sm:mb-4 text-center sticky top-0 bg-white/90 pb-2 z-10">🎄 Christmas Message 🎄</h4>
           <div className="space-y-2 font-poppins text-sm sm:text-lg text-gray-700 leading-relaxed whitespace-pre-line">
             {christmasMessages.map((line, index) => (
               <p key={index} className={line.startsWith("🎄") || line.includes("Joash") ? "font-bold text-center" : ""}>
@@ -101,8 +101,8 @@ export default function CEOMessage({ onClose }) {
         </div>
 
         {/* New Year Message */}
-        <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6 border-l-4 border-red-600">
-          <h4 className="font-dancing text-2xl sm:text-3xl text-red-600 mb-3 sm:mb-4 text-center">🌟 New Year Message 🌟</h4>
+        <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-4 sm:mb-6 border-l-4 border-red-600 max-h-[50vh] overflow-y-auto">
+          <h4 className="font-dancing text-2xl sm:text-3xl text-red-600 mb-3 sm:mb-4 text-center sticky top-0 bg-white/90 pb-2 z-10">🌟 New Year Message 🌟</h4>
           <div className="space-y-2 font-poppins text-sm sm:text-lg text-gray-700 leading-relaxed whitespace-pre-line">
             {newYearMessages.map((line, index) => (
               <p key={index} className={line.startsWith("🌟") || line.includes("Joash") ? "font-bold text-center" : ""}>
