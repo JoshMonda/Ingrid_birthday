@@ -42,14 +42,14 @@ function App() {
 
   const handleGiftOpened = () => {
     setCurrentView('card')
-    // Show special features after card is revealed
-    setTimeout(() => setShowWish(true), 2000)
-    setTimeout(() => setShowCake(true), 4000)
-    setTimeout(() => setShowVoice(true), 6000)
+    // Show special features after card is revealed - with longer delays to avoid overlap
+    setTimeout(() => setShowWish(true), 3000)
+    setTimeout(() => setShowCake(true), 5000)
+    setTimeout(() => setShowVoice(true), 7000)
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-700 via-green-600 to-red-600 overflow-x-hidden relative flex items-center justify-center p-3 sm:p-5 py-5 sm:py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-700 via-green-600 to-red-600 overflow-x-hidden overflow-y-auto relative flex items-center justify-center p-3 sm:p-5 py-5 sm:py-8">
       <BackgroundEffects />
       <CursorTrail />
       <AudioControls isEnabled={isAudioEnabled} onToggle={setIsAudioEnabled} />
@@ -63,9 +63,9 @@ function App() {
       )}
       
       {currentView === 'card' && (
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full max-w-7xl mx-auto pb-24 sm:pb-8">
           {/* Countdown Timers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8 px-3 sm:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-8 px-3 sm:px-4 mt-2 sm:mt-0">
             <CountdownTimer 
               targetDate={christmasTarget}
               label="Countdown to Christmas"
@@ -79,7 +79,7 @@ function App() {
           </div>
 
           {/* CEO Message Button */}
-          <div className="text-center mb-6 sm:mb-8 px-3 sm:px-4">
+          <div className="text-center mb-4 sm:mb-8 px-3 sm:px-4">
             <button
               onClick={() => setShowCEOMessage(true)}
               className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 animate-pulse w-full sm:w-auto"
@@ -95,7 +95,7 @@ function App() {
           />
 
           {/* Credits */}
-          <div className="text-center mt-4 sm:mt-6 text-white/80 text-xs sm:text-sm px-4">
+          <div className="text-center mt-4 sm:mt-6 text-white/80 text-xs sm:text-sm px-4 pb-4">
             <p>✨ This celebration platform is a gift from Joash ✨</p>
             <p className="mt-1">Created with love for Global South Incubator Team</p>
           </div>

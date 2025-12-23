@@ -239,10 +239,10 @@ This message was sent from the Global South Incubator Christmas Celebration plat
   }
 
   return (
-    <div className="fixed top-3 right-3 left-3 sm:top-5 sm:right-5 sm:left-auto z-[1000] animate-[fadeInUp_1s_ease-out] max-w-sm mx-auto sm:mx-0">
-      <div className="bg-white/95 rounded-[15px] sm:rounded-[20px] p-4 sm:p-5 text-center shadow-2xl backdrop-blur-md border-2 border-white/30 w-full">
-        <div className="flex justify-between items-center mb-3 sm:mb-4">
-          <h3 className="font-dancing text-lg sm:text-3xl text-green-700 m-0 pr-2">🎤 Record a Christmas Message 🎤</h3>
+    <div className="fixed top-2 right-2 left-2 sm:top-5 sm:right-5 sm:left-auto z-[1000] animate-[fadeInUp_1s_ease-out] max-w-sm mx-auto sm:mx-0">
+      <div className="bg-white/95 rounded-[15px] sm:rounded-[20px] p-3 sm:p-5 text-center shadow-2xl backdrop-blur-md border-2 border-white/30 w-full max-h-[85vh] overflow-y-auto">
+        <div className="flex justify-between items-start mb-2 sm:mb-4 gap-2">
+          <h3 className="font-dancing text-base sm:text-3xl text-green-700 m-0 pr-2 leading-tight">🎤 Record a Christmas Message 🎤</h3>
           <button
             onClick={onClose}
             className="bg-black/10 border-none text-2xl sm:text-3xl text-gray-400 cursor-pointer p-1.5 sm:p-2 rounded-full transition-all duration-300 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-black/20 hover:text-gray-800 hover:scale-110 flex-shrink-0"
@@ -250,41 +250,41 @@ This message was sent from the Global South Incubator Christmas Celebration plat
             ×
           </button>
         </div>
-        <div className="flex flex-col gap-2.5 mb-4">
+        <div className="flex flex-col gap-2 mb-3 sm:mb-4">
           <button
             onClick={isRecording ? stopRecording : startRecording}
-            className={`flex items-center justify-center gap-2 py-2.5 px-4 border-none rounded-[20px] text-sm font-medium cursor-pointer transition-all duration-300 w-full ${
+            className={`flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 sm:px-4 border-none rounded-[15px] sm:rounded-[20px] text-xs sm:text-sm font-medium cursor-pointer transition-all duration-300 w-full ${
               isRecording
                 ? 'bg-gradient-to-r from-cyan-400 to-cyan-500 text-white animate-pulse'
                 : 'bg-gradient-to-r from-red-500 to-red-600 text-white hover:-translate-y-0.5 hover:shadow-lg'
             }`}
           >
-            <span>{isRecording ? '⏹️' : '🎤'}</span>
-            {isRecording ? 'Stop Recording' : 'Start Recording'}
+            <span className="text-sm sm:text-base">{isRecording ? '⏹️' : '🎤'}</span>
+            <span className="text-xs sm:text-sm">{isRecording ? 'Stop Recording' : 'Start Recording'}</span>
           </button>
           <button
             onClick={playRecording}
             disabled={!audioUrl}
-            className="flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-blue-400 to-blue-500 text-white border-none rounded-[20px] text-sm font-medium cursor-pointer transition-all duration-300 w-full hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            className="flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 sm:px-4 bg-gradient-to-r from-blue-400 to-blue-500 text-white border-none rounded-[15px] sm:rounded-[20px] text-xs sm:text-sm font-medium cursor-pointer transition-all duration-300 w-full hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
-            <span>▶️</span>
-            Play Message
+            <span className="text-sm sm:text-base">▶️</span>
+            <span className="text-xs sm:text-sm">Play Message</span>
           </button>
           <button
             onClick={handleSend}
             disabled={!recordedBlob}
-            className="flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-green-600 to-red-600 text-white border-none rounded-[20px] text-sm font-medium cursor-pointer transition-all duration-300 w-full hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+            className="flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 sm:px-4 bg-gradient-to-r from-green-600 to-red-600 text-white border-none rounded-[15px] sm:rounded-[20px] text-xs sm:text-sm font-medium cursor-pointer transition-all duration-300 w-full hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
           >
-            <span>📧</span>
-            Send to Team
+            <span className="text-sm sm:text-base">📧</span>
+            <span className="text-xs sm:text-sm">Send to Team</span>
           </button>
         </div>
         {recordingStatus && (
-          <div className="text-green-700 font-medium mb-4 min-h-5 whitespace-pre-line text-sm">
+          <div className="text-green-700 font-medium mb-2 sm:mb-4 min-h-5 whitespace-pre-line text-xs sm:text-sm">
             {recordingStatus}
           </div>
         )}
-        <div className="text-green-700 italic text-xs sm:text-base">
+        <div className="text-green-700 italic text-[10px] sm:text-base leading-tight">
           Record a special Christmas message for the Global South Incubator team!
         </div>
       </div>

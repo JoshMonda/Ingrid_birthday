@@ -16,10 +16,10 @@ export default function ChristmasCake({ onClose }) {
   }
 
   return (
-    <div className="fixed bottom-3 right-3 left-3 sm:bottom-5 sm:right-5 sm:left-auto z-[1000] animate-[fadeInUp_1s_ease-out] max-w-xs min-w-[200px] sm:min-w-[250px] mx-auto sm:mx-0">
-      <div className="bg-white/95 rounded-[15px] sm:rounded-[20px] p-4 sm:p-5 text-center shadow-2xl backdrop-blur-md border-2 border-white/30 w-full">
-        <div className="flex justify-between items-center mb-3 sm:mb-4">
-          <h3 className="font-dancing text-lg sm:text-2xl text-green-700 m-0 pr-2">🎂 Your Celebration Cake</h3>
+    <div className="fixed bottom-2 right-2 left-2 sm:bottom-5 sm:right-5 sm:left-auto z-[998] animate-[fadeInUp_1s_ease-out] max-w-xs min-w-[200px] sm:min-w-[250px] mx-auto sm:mx-0">
+      <div className="bg-white/95 rounded-[15px] sm:rounded-[20px] p-3 sm:p-5 text-center shadow-2xl backdrop-blur-md border-2 border-white/30 w-full max-h-[70vh] overflow-y-auto">
+        <div className="flex justify-between items-start mb-2 sm:mb-4 gap-2">
+          <h3 className="font-dancing text-base sm:text-2xl text-green-700 m-0 pr-2 leading-tight">🎂 Your Celebration Cake</h3>
           <button
             onClick={onClose}
             className="bg-black/10 border-none text-2xl sm:text-3xl text-gray-400 cursor-pointer p-1.5 sm:p-2 rounded-full transition-all duration-300 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-black/20 hover:text-gray-800 hover:scale-110 flex-shrink-0"
@@ -67,10 +67,10 @@ export default function ChristmasCake({ onClose }) {
           </div>
         </div>
         
-        <div className="text-green-700 text-sm sm:text-base font-medium animate-pulse">
+        <div className="text-green-700 text-xs sm:text-base font-medium animate-pulse">
           Click the candles to light them up! 🕯️
         </div>
-        <p className="text-xs sm:text-sm text-gray-600 mt-2">
+        <p className="text-[10px] sm:text-sm text-gray-600 mt-2 leading-tight">
           Each candle represents a milestone we achieved together in 2025
         </p>
       </div>
