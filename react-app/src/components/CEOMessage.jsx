@@ -72,8 +72,16 @@ export default function CEOMessage({ onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2000] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-      <div className="bg-gradient-to-br from-green-50 to-red-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-4xl w-full shadow-2xl border-2 sm:border-4 border-green-600 my-4 sm:my-8">
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2000] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+      <div className="bg-gradient-to-br from-green-50 to-red-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-4xl w-full shadow-2xl border-2 sm:border-4 border-green-600 my-4 sm:my-8 relative">
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-red-500/90 hover:bg-red-600 border-none text-2xl sm:text-3xl text-white cursor-pointer p-2 sm:p-2.5 rounded-full transition-all duration-300 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:scale-110 shadow-lg z-10"
+          title="Close"
+        >
+          ×
+        </button>
         <div className="text-center mb-4 sm:mb-6">
           <div className="text-4xl sm:text-6xl mb-2 sm:mb-4">👑</div>
           <h2 className="font-dancing text-3xl sm:text-5xl text-green-700 mb-2">Messages from Joash</h2>
@@ -102,6 +110,30 @@ export default function CEOMessage({ onClose }) {
               </p>
             ))}
           </div>
+        </div>
+
+        {/* Response Option */}
+        <div className="bg-white/90 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6">
+          <h4 className="font-dancing text-xl sm:text-2xl text-green-700 mb-3 sm:mb-4 text-center">
+            💌 Would you like to respond?
+          </h4>
+          <div className="flex justify-center">
+            <button
+              onClick={() => {
+                const subject = encodeURIComponent(`Response to Joash's Christmas/New Year Message`)
+                const body = encodeURIComponent(`Dear Joash,\n\nThank you for your thoughtful messages! I wanted to respond...\n\nBest regards,\nBrian C. Alston`)
+                const emailLink = `mailto:jmonda2020@gmail.com?subject=${subject}&body=${body}`
+                window.location.href = emailLink
+              }}
+              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <span>📧</span>
+              <span>Email Joash</span>
+            </button>
+          </div>
+          <p className="text-xs sm:text-sm text-gray-600 mt-3 sm:mt-4 text-center">
+            Joash's Email: jmonda2020@gmail.com
+          </p>
         </div>
 
         <div className="text-center">

@@ -247,7 +247,8 @@ export default function TeamMembers({ onClose }) {
               setSelectedMember(null)
               setShowNewYear(false)
             }}
-            className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-black/10 border-none text-2xl sm:text-3xl text-gray-600 cursor-pointer p-1.5 sm:p-2 rounded-full transition-all duration-300 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-black/20 hover:text-gray-800 hover:scale-110 z-10"
+            className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-red-500/90 hover:bg-red-600 border-none text-2xl sm:text-3xl text-white cursor-pointer p-2 sm:p-2.5 rounded-full transition-all duration-300 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:scale-110 shadow-lg z-10"
+            title="Close"
           >
             ×
           </button>
@@ -258,9 +259,10 @@ export default function TeamMembers({ onClose }) {
               setSelectedMember(null)
               setShowNewYear(false)
             }}
-            className="mb-4 text-green-700 hover:text-green-800 font-medium text-sm sm:text-base flex items-center gap-2"
+            className="flex items-center justify-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
           >
-            ← Back to Team Members
+            <span>←</span>
+            <span>Back to Team Members</span>
           </button>
 
           {/* Header */}
@@ -344,9 +346,19 @@ export default function TeamMembers({ onClose }) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-black/10 border-none text-2xl sm:text-3xl text-gray-600 cursor-pointer p-1.5 sm:p-2 rounded-full transition-all duration-300 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-black/20 hover:text-gray-800 hover:scale-110 z-10"
+          className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-red-500/90 hover:bg-red-600 border-none text-2xl sm:text-3xl text-white cursor-pointer p-2 sm:p-2.5 rounded-full transition-all duration-300 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:scale-110 shadow-lg z-10"
+          title="Close"
         >
           ×
+        </button>
+
+        {/* Back to Dashboard Button */}
+        <button
+          onClick={onClose}
+          className="flex items-center justify-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
+        >
+          <span>←</span>
+          <span>Back to Main Dashboard</span>
         </button>
 
         {/* Header */}
