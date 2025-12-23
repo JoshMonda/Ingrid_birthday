@@ -11,6 +11,7 @@ import AudioControls from './components/AudioControls'
 import CursorTrail from './components/CursorTrail'
 import CountdownTimer from './components/CountdownTimer'
 import CEOMessage from './components/CEOMessage'
+import TeamMembers from './components/TeamMembers'
 
 function App() {
   const [currentView, setCurrentView] = useState('conversation') // conversation, gift, card
@@ -20,6 +21,7 @@ function App() {
   const [showCake, setShowCake] = useState(false)
   const [showVoice, setShowVoice] = useState(false)
   const [showCEOMessage, setShowCEOMessage] = useState(false)
+  const [showTeamMembers, setShowTeamMembers] = useState(false)
   const [isAudioEnabled, setIsAudioEnabled] = useState(false)
 
   // Calculate target dates for countdowns
@@ -79,12 +81,22 @@ function App() {
           </div>
 
           {/* CEO Message Button */}
-          <div className="text-center mb-4 sm:mb-8 px-3 sm:px-4">
+          <div className="text-center mb-4 sm:mb-6 px-3 sm:px-4">
             <button
               onClick={() => setShowCEOMessage(true)}
-              className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 animate-pulse w-full sm:w-auto"
+              className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 animate-pulse w-full sm:w-auto mb-3 sm:mb-0"
             >
               👑 Special Message for CEO Brian C. Alston 👑
+            </button>
+          </div>
+
+          {/* Team Members Button */}
+          <div className="text-center mb-4 sm:mb-8 px-3 sm:px-4">
+            <button
+              onClick={() => setShowTeamMembers(true)}
+              className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-blue-500 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-xl shadow-2xl hover:shadow-3xl hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+            >
+              👥 Team Member Messages from Joash 👥
             </button>
           </div>
 
@@ -120,6 +132,10 @@ function App() {
       
       {showCEOMessage && (
         <CEOMessage onClose={() => setShowCEOMessage(false)} />
+      )}
+      
+      {showTeamMembers && (
+        <TeamMembers onClose={() => setShowTeamMembers(false)} />
       )}
     </div>
   )
