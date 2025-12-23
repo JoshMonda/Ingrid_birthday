@@ -119,13 +119,21 @@ export default function CEOMessage({ onClose }) {
           </h4>
           <div className="flex justify-center">
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault()
                 const subject = encodeURIComponent(`Response to Joash's Christmas/New Year Message`)
                 const body = encodeURIComponent(`Dear Joash,\n\nThank you for your thoughtful messages! I wanted to respond...\n\nBest regards,\nBrian C. Alston`)
                 const emailLink = `mailto:jmonda2020@gmail.com?subject=${subject}&body=${body}`
-                window.location.href = emailLink
+                
+                // Create a temporary anchor element for better compatibility
+                const link = document.createElement('a')
+                link.href = emailLink
+                link.style.display = 'none'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
               }}
-              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               <span>📧</span>
               <span>Email Joash</span>

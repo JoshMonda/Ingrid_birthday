@@ -343,21 +343,22 @@ export default function TeamMembers({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[2000] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
       <div className="bg-gradient-to-br from-green-50 to-red-50 rounded-2xl sm:rounded-3xl p-4 sm:p-8 max-w-4xl w-full shadow-2xl border-2 sm:border-4 border-green-600 my-4 sm:my-8 relative">
-        {/* Close button */}
+        {/* Close button - More prominent */}
         <button
           onClick={onClose}
-          className="absolute top-3 sm:top-5 right-3 sm:right-5 bg-red-500/90 hover:bg-red-600 border-none text-2xl sm:text-3xl text-white cursor-pointer p-2 sm:p-2.5 rounded-full transition-all duration-300 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:scale-110 shadow-lg z-10"
+          className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-red-600 hover:bg-red-700 border-2 border-white text-2xl sm:text-3xl text-white cursor-pointer p-2 sm:p-3 rounded-full transition-all duration-300 w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center hover:scale-110 shadow-2xl z-50 font-bold"
           title="Close"
+          aria-label="Close"
         >
           ×
         </button>
 
-        {/* Back to Dashboard Button */}
+        {/* Back to Dashboard Button - Always visible at top */}
         <button
           onClick={onClose}
-          className="flex items-center justify-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-medium text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto"
+          className="flex items-center justify-center gap-2 mb-4 sm:mb-6 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto mt-2"
         >
-          <span>←</span>
+          <span className="text-lg sm:text-xl">←</span>
           <span>Back to Main Dashboard</span>
         </button>
 
